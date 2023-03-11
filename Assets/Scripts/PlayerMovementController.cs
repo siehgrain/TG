@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using DG.Tweening;
+using Cinemachine;
 
 public class PlayerMovementController : MonoBehaviour
 {
@@ -12,8 +14,10 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private float fallMultiplier = 2.5f;
     [SerializeField] private float slopeCheckDistance = 1f;
     [SerializeField] private float groundCheckDistance = 1f;
+    [SerializeField] private CameraShake cameraShake;
     [SerializeField] private float coyoteTime = 0.2f;
     [SerializeField] private float jumpBufferTime = 0.2f;
+    
     [SerializeField] private PhysicsMaterial2D friccao;
     [SerializeField] private PhysicsMaterial2D noFriccao;
     [SerializeField] private float accelerationTime = 0.1f;
@@ -22,7 +26,10 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private float dashSpeed = 20f;       // The speed at which the player will dash
     [SerializeField] private float dashDuration = 0.02f;
     [SerializeField] private float dashCooldown = 3.0f;// The duration of the dash animation
+    [SerializeField] private ParticleSystem dust;
+    [SerializeField] private ParticleSystem jumpParticle;// The duration of the dash animation[SerializeField] private ParticleSystem dust;// The duration of the dash animation
     private bool canDash = true;
+    public bool isFacingRight = true;
     private float lastDashTime;
     private Rigidbody2D rb;
     private Animator animator;
@@ -51,7 +58,9 @@ public class PlayerMovementController : MonoBehaviour
     private float currentDecelerationTime = 0f;
     private float targetSpeed = 0f;
 
-
+    private void CreateDust(){
+        dust.Play();
+    }
 
     private float horizontalInput;
 
@@ -62,7 +71,6 @@ public class PlayerMovementController : MonoBehaviour
         // Calcula a gravidade e a velocidade do salto
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
-
     }
 
     private void FixedUpdate()
@@ -161,6 +169,7 @@ public class PlayerMovementController : MonoBehaviour
         if (Input.GetButtonDown("Dash") && !isDashing)
         {
             StartCoroutine(Dash());
+
         }
 
         //verifica se o personagem está no chão
@@ -213,6 +222,7 @@ public class PlayerMovementController : MonoBehaviour
     }
     private void Jump()
     {
+        jumpParticle.Play();
         isJumping = true;
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
 
@@ -226,6 +236,7 @@ public class PlayerMovementController : MonoBehaviour
     }
     private void HandleLanding()
     {
+        CreateDust();
         isJumping = false;
         animator.SetBool("IsLanding", true);
     }
@@ -236,9 +247,11 @@ public class PlayerMovementController : MonoBehaviour
     }
     private void HorizontalInput()
     {
+        if(Input.GetButtonDown("Horizontal")){
+            CreateDust();
+        }
         // Detectar entrada de movimento horizontal
         horizontalInput = Input.GetAxisRaw("Horizontal");
-
         //// Atualizar a anima��o
         animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
 
@@ -246,6 +259,7 @@ public class PlayerMovementController : MonoBehaviour
         if (horizontalInput != 0)
         {
             transform.localScale = new Vector3(Mathf.Sign(horizontalInput), 1, 1);
+            isFacingRight = (horizontalInput > 0);
         }
     }
 
@@ -255,6 +269,9 @@ private IEnumerator Dash()
     // Check if the player can dash
     if (canDash)
     {
+        FindObjectOfType<GhostTrail>().ShowGhost();
+        FindObjectOfType<RippleEffect>().Emit(Camera.main.WorldToViewportPoint(transform.position));
+        cameraShake.ShakeCamera();
         isDashing = true;
         animator.SetBool("IsDashing", isDashing);
         // Determine the direction of the dash based on the player's local scale
@@ -281,7 +298,7 @@ private IEnumerator Dash()
         rb.velocity = velocity;
 
         
-
+        
         yield return new WaitForSeconds(dashDuration);
 
         isDashing = false;
@@ -294,6 +311,7 @@ private IEnumerator Dash()
         lastDashTime = Time.time;
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
+        
     }
 }
 
