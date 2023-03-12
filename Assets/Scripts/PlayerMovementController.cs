@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using DG.Tweening;
 using Cinemachine;
-
+using static Weapon;
 public class PlayerMovementController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
@@ -28,6 +28,13 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private float dashCooldown = 3.0f;// The duration of the dash animation
     [SerializeField] private ParticleSystem dust;
     [SerializeField] private ParticleSystem jumpParticle;// The duration of the dash animation[SerializeField] private ParticleSystem dust;// The duration of the dash animation
+    [SerializeField] private Weapon bullet; 
+    [SerializeField] private AudioSource footstepAudioSource; //referência ao objeto AudioSource para tocar o som dos passos
+    [SerializeField] private AudioClip footstepAudioClip;
+    [SerializeField] private AudioSource DashAudio;
+    [SerializeField] private AudioClip DashClip;
+    [SerializeField] private float footstepInterval;
+    private float timeSinceLastFootstep = 0f;
     private bool canDash = true;
     public bool isFacingRight = true;
     private float lastDashTime;
@@ -66,6 +73,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Start()
     {
+        
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         // Calcula a gravidade e a velocidade do salto
@@ -120,6 +128,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Update()
     {
+        animator.SetBool("IsDashing", isDashing);
         animator.SetBool("IsShooting", isShooting);
         animator.SetBool("IsDead", isDead);
         animator.SetBool("IsCharging", IsCharging);
@@ -144,6 +153,7 @@ public class PlayerMovementController : MonoBehaviour
         {
             coyoteTimeCounter -= Time.deltaTime;
         }
+        
         if (Input.GetButtonDown("Jump"))
         {
             jumpBufferCounter = jumpBufferTime;
@@ -176,7 +186,7 @@ public class PlayerMovementController : MonoBehaviour
         
 
         //Carrega o tiro
-        if (Input.GetButtonDown("Fire1") && isGrounded && !isDashing)
+        if (Input.GetButtonDown("Fire1"))
         {
             IsCharging = true;
         }
@@ -187,7 +197,7 @@ public class PlayerMovementController : MonoBehaviour
             HorizontalInput();
         }
         
-        if (Input.GetButtonUp("Fire1") && IsCharging && isGrounded && !isDashing)
+        if (Input.GetButtonUp("Fire1"))
         {
             Shoot();
         }
@@ -217,6 +227,7 @@ public class PlayerMovementController : MonoBehaviour
         animator.SetBool("IsCharging", IsCharging);
         // Realizar a��o quando o bot�o foi mantido pressionado por tempo suficiente
         isShooting = true;
+        bullet.Fire(isFacingRight); // Chame o método Fire() da instância bullet
         animator.SetBool("IsShooting", isShooting);
         Invoke("ResetShoot", 0.5f);
     }
@@ -238,6 +249,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         CreateDust();
         isJumping = false;
+        PlayFootstepSound();
         animator.SetBool("IsLanding", true);
     }
     private void DetectGround(){
@@ -250,6 +262,7 @@ public class PlayerMovementController : MonoBehaviour
         if(Input.GetButtonDown("Horizontal")){
             CreateDust();
         }
+        
         // Detectar entrada de movimento horizontal
         horizontalInput = Input.GetAxisRaw("Horizontal");
         //// Atualizar a anima��o
@@ -261,19 +274,25 @@ public class PlayerMovementController : MonoBehaviour
             transform.localScale = new Vector3(Mathf.Sign(horizontalInput), 1, 1);
             isFacingRight = (horizontalInput > 0);
         }
+        
     }
 
-   
+   public void SetTrigger(string trigger)
+    {
+        animator.SetTrigger(trigger);
+    }
 private IEnumerator Dash()
 {
     // Check if the player can dash
     if (canDash)
     {
+        PlayDashSound();
+        animator.SetTrigger("dash");
+        isDashing = true;
         FindObjectOfType<GhostTrail>().ShowGhost();
         FindObjectOfType<RippleEffect>().Emit(Camera.main.WorldToViewportPoint(transform.position));
         cameraShake.ShakeCamera();
-        isDashing = true;
-        animator.SetBool("IsDashing", isDashing);
+        
         // Determine the direction of the dash based on the player's local scale
         int dashDirection = (int)Mathf.Sign(transform.localScale.x);
 
@@ -296,13 +315,8 @@ private IEnumerator Dash()
         // Apply the dash force in the correct direction
         Vector2 velocity = (endPoint - (Vector2)transform.position).normalized * dashSpeed;
         rb.velocity = velocity;
-
-        
-        
         yield return new WaitForSeconds(dashDuration);
-
         isDashing = false;
-        animator.SetBool("IsDashing", isDashing);
 
         rb.velocity = Vector2.zero;
 
@@ -314,6 +328,16 @@ private IEnumerator Dash()
         
     }
 }
+    private void PlayFootstepSound()
+    {
+        footstepAudioSource.clip = footstepAudioClip; //define o áudio a ser tocado pelo objeto AudioSource
+        footstepAudioSource.Play(); //reproduz o som dos passos
+    }
+    private void PlayDashSound()
+    {
+        DashAudio.clip = DashClip; //define o áudio a ser tocado pelo objeto AudioSource
+        DashAudio.Play(); //reproduz o som dos passos
+    }
 
 
 
