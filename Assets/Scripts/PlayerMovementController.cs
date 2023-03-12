@@ -188,7 +188,8 @@ public class PlayerMovementController : MonoBehaviour
         //Carrega o tiro
         if (Input.GetButtonDown("Fire1"))
         {
-            IsCharging = true;
+            Shoot();
+            
         }
 
         //Movimentação
@@ -196,11 +197,10 @@ public class PlayerMovementController : MonoBehaviour
         {
             HorizontalInput();
         }
-        
-        if (Input.GetButtonUp("Fire1"))
-        {
-            Shoot();
-        }
+    
+    }
+    private void tiro(){
+        bullet.Fire(isFacingRight);
     }
     private void DetectSlopes()
     {
@@ -223,11 +223,11 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Shoot()
     {
+        tiro();
         IsCharging = false;
         animator.SetBool("IsCharging", IsCharging);
         // Realizar a��o quando o bot�o foi mantido pressionado por tempo suficiente
         isShooting = true;
-        bullet.Fire(isFacingRight); // Chame o método Fire() da instância bullet
         animator.SetBool("IsShooting", isShooting);
         Invoke("ResetShoot", 0.5f);
     }

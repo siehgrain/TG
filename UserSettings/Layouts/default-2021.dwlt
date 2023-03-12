@@ -120,7 +120,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 39511
+  controlID: 121
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 39611
+  controlID: 89
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -164,7 +164,7 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 828
-    height: 445
+    height: 443
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 14}
@@ -189,9 +189,9 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 445
+    y: 443
     width: 828
-    height: 502
+    height: 504
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 13}
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 39512
+  controlID: 127
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -251,7 +251,7 @@ MonoBehaviour:
   - {fileID: 17}
   - {fileID: 18}
   m_Selected: 0
-  m_LastSelected: 2
+  m_LastSelected: 1
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -327,9 +327,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 518
+    y: 516
     width: 827
-    height: 481
+    height: 483
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -379,22 +379,22 @@ MonoBehaviour:
       x: 0
       y: 21
       width: 827
-      height: 460
-    m_Scale: {x: 0.42592594, y: 0.42592594}
-    m_Translation: {x: 413.5, y: 230.00002}
+      height: 462
+    m_Scale: {x: 0.42777777, y: 0.42777777}
+    m_Translation: {x: 413.5, y: 231}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -970.82605
+      x: -966.6234
       y: -540
-      width: 1941.6521
+      width: 1933.2468
       height: 1080
     m_MinimalGUI: 1
-  m_defaultScale: 0.42592594
-  m_LastWindowPixelSize: {x: 827, y: 481}
+  m_defaultScale: 0.42777777
+  m_LastWindowPixelSize: {x: 827, y: 483}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -423,7 +423,7 @@ MonoBehaviour:
     x: 0
     y: 73
     width: 827
-    height: 424
+    height: 422
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -680,9 +680,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 3.4467359, y: -9.434586, z: 14.575259}
+    m_Target: {x: -0.2400316, y: 21.60259, z: 10.29081}
     speed: 2
-    m_Value: {x: 3.4467359, y: -9.434586, z: 14.575259}
+    m_Value: {x: -0.2400316, y: 21.60259, z: 10.29081}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -733,9 +733,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 7.971249
+    m_Target: 2.3728743
     speed: 2
-    m_Value: 7.971249
+    m_Value: 2.3728743
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -819,9 +819,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: b060fcff6c7efcff5c66feffe4faffffde640000
+      m_SelectedIDs: 84650000
+      m_LastClickedID: 25988
+      m_ExpandedIDs: e4faffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -865,9 +865,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 593
+    x: 828
     y: 73
-    width: 740
+    width: 570
     height: 440
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -884,14 +884,14 @@ MonoBehaviour:
     - {fileID: 1179927787000330114, guid: c6f36441a2e6f5a499bb34b5a078164d, type: 2}
     - {fileID: -3068898253834413474, guid: 40d3662bb101eae4a996e97f0e80b8d5, type: 2}
     m_ValueSerializationHelper:
-    - e00: 0.51640266
+    - e00: 0.656772
       e01: 0
       e02: 0
-      e03: -139.42868
+      e03: -429.39728
       e10: 0
-      e11: 0.51640266
+      e11: 0.656772
       e12: 0
-      e13: 222.05315
+      e13: 282.41196
       e20: 0
       e21: 0
       e22: 1
@@ -1013,9 +1013,9 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 05b9097aab304bf438227ac160c4df2e, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: c6f36441a2e6f5a499bb34b5a078164d, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 2260394506143191091, guid: 05b9097aab304bf438227ac160c4df2e, type: 2}
+  - m_Target: {fileID: 1179927787000330114, guid: c6f36441a2e6f5a499bb34b5a078164d, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -1104,22 +1104,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Sprites/Coletaveis/Azul
+    - Assets/Scripts
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Sprites/Coletaveis/Azul
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\leona\Desktop\TG!\Misterio Intergalactico Unity\TG
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 23}
-    m_SelectedIDs: 166e0000
-    m_LastClickedID: 28182
-    m_ExpandedIDs: 0000000056680000586800005a6800005c6800005e6800006068000062680000ea68000000ca9a3b
+    m_SelectedIDs: 24690000
+    m_LastClickedID: 26916
+    m_ExpandedIDs: 0000000006690000086900000a6900000c6900000e69000010690000126900002a69000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1147,7 +1147,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000586800005a6800005c6800005e680000606800006268000030bb000000ca9a3b
+    m_ExpandedIDs: 0000000006690000086900000a6900000c6900000e6900001069000012690000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1302,4 +1302,4 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 25954
+  m_LastSelectedObjectID: 25988
